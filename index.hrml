@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MAXPOLLO JK | Asadero en Tibú</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dcqnjn6fe/image/upload/v1776198955/Photoroom-20260414_153343365_fzykci.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --rojo: #CC0000;
+            --rojo-oscuro: #990000;
+            --rojo-vivo: #FF0000;
+            --amarillo: #FFC300;
+            --amarillo-oscuro: #E6A800;
+            --amarillo-claro: #FFF3C4;
+            --negro: #0D0D0D;
+            --negro-suave: #1A1A1A;
+            --gris-oscuro: #2C2C2C;
+            --gris-medio: #4A4A4A;
+            --gris-claro: #F5F5F5;
+            --blanco: #FFFFFF;
+            --sombra: rgba(0,0,0,0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--blanco);
+            color: var(--negro);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--negro); }
+        ::-webkit-scrollbar-thumb { background: var(--rojo); border-radius: 3px; }
+
+        /* ===== WHATSAPP FLOTANTE ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        .whatsapp-bubble {
+            background: var(--blanco);
+            color: var(--gris-oscuro);
+            padding: 10px 16px;
+            border-radius: 20px 20px 4px 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+            white-space: nowrap;
+            border: 2px solid #25D366;
+            display: none;
+            animation: fadeInBubble 0.3s ease;
+        }
+        @keyframes fadeInBubble {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .whatsapp-float:hover .whatsapp-bubble { display: block; }
+        .whatsapp-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            color: white;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.45);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulseWA 2.5s infinite;
+        }
+        @keyframes pulseWA {
+            0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,0.45); }
+            50%      { box-shadow: 0 6px 32px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0.1); }
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: var(--negro);
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            border-bottom: 3px solid var(--amarillo);
+        }
+        .nav-bar {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+            gap: 16px;
+        }
+        .logo-img {
+            height: 54px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1.05);
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-link {
+            color: #ccc;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 40px;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .nav-link:hover { color: var(--amarillo); }
+        .btn-nav-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 9px 18px;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            text-decoration: none;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .btn-nav-wa:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: var(--negro);
+            position: relative;
+            overflow: hidden;
+            min-height: 88vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 80% 50%, rgba(204,0,0,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at 10% 80%, rgba(255,195,0,0.08) 0%, transparent 60%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(255,255,255,0.012) 30px,
+                    rgba(255,255,255,0.012) 31px
+                );
+            pointer-events: none;
+        }
+        .hero-stripe {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--rojo), var(--amarillo), var(--rojo));
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+        .hero-left {}
+        .hero-tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,195,0,0.12);
+            border: 1px solid rgba(255,195,0,0.3);
+            color: var(--amarillo);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 18px;
+            border-radius: 40px;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--blanco);
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero h1 span {
+            color: var(--amarillo);
+            position: relative;
+        }
+        .hero-desc {
+            color: #BBBBBB;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+        .hero-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 36px;
+        }
+        .chip {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #ddd;
+            padding: 7px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chip-open {
+            background: rgba(28,139,76,0.2);
+            border-color: rgba(28,139,76,0.4);
+            color: #4ade80;
+            font-weight: 700;
+        }
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        .btn-hero-main {
+            background: linear-gradient(135deg, var(--rojo), var(--rojo-oscuro));
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 24px rgba(204,0,0,0.4);
+            letter-spacing: 0.5px;
+        }
+        .btn-hero-main:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(204,0,0,0.55); }
+        .btn-hero-wa {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 15px 28px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+        }
+        .btn-hero-wa:hover { transform: translateY(-2px); }
+        .btn-hero-outline {
+            background: transparent;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 14px 24px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-hero-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
+
+        /* Hero right: imagen + info card */
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .hero-logo-wrap {
+            background: radial-gradient(circle, rgba(204,0,0,0.18) 0%, transparent 70%);
+            border: 2px solid rgba(255,195,0,0.2);
+            border-radius: 32px;
+            padding: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+        .hero-logo {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+            filter: drop-shadow(0 8px 40px rgba(204,0,0,0.4));
+        }
+        .hero-info-cards {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+        .h-info-card {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+        }
+        .h-info-card i {
+            font-size: 1.4rem;
+            color: var(--amarillo);
+            display: block;
+            margin-bottom: 6px;
+        }
+        .h-info-card strong {
+            display: block;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .h-info-card span {
+            color: #aaa;
+            font-size: 0.72rem;
+        }
+
+        /* ===== SECCIÓN GENERAL ===== */
+        .section { padding: 80px 0; }
+        .section-alt { background: var(--negro); }
+        .section-light { background: var(--gris-claro); }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 52px;
+        }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(204,0,0,0.08);
+            border: 1px solid rgba(204,0,0,0.2);
+            color: var(--rojo);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 7px 18px;
+            border-radius: 40px;
+            margin-bottom: 16px;
+        }
+        .section-alt .section-label {
+            background: rgba(255,195,0,0.1);
+            border-color: rgba(255,195,0,0.25);
+            color: var(--amarillo);
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--negro);
+            line-height: 1.15;
+        }
+        .section-alt .section-title { color: var(--blanco); }
+        .section-title span { color: var(--rojo); }
+        .section-alt .section-title span { color: var(--amarillo); }
+        .section-desc {
+            color: var(--gris-medio);
+            margin-top: 12px;
+            font-size: 1rem;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-alt .section-desc { color: #999; }
+
+        /* ===== MENU ===== */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 44px;
+        }
+        .cat-btn {
+            background: transparent;
+            border: 1.5px solid #ddd;
+            color: var(--gris-medio);
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .cat-btn.active,
+        .cat-btn:hover {
+            background: var(--rojo);
+            border-color: var(--rojo);
+            color: white;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 24px;
+        }
+        .menu-card {
+            background: var(--blanco);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #EBEBEB;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+        }
+        .menu-card-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--amarillo);
+            color: var(--negro);
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 40px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        .menu-card-img {
+            background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%);
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50px;
+            background: linear-gradient(to top, rgba(255,255,255,1), transparent);
+        }
+        .menu-card-body {
+            padding: 20px 22px 24px;
+        }
+        .menu-card-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--negro);
+            margin-bottom: 6px;
+        }
+        .menu-card-desc {
+            color: #777;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            margin-bottom: 16px;
+        }
+        .menu-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .menu-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--rojo);
+        }
+        .menu-price sup {
+            font-size: 0.8rem;
+            vertical-align: top;
+            margin-top: 5px;
+        }
+        .btn-order {
+            background: var(--rojo);
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .btn-order:hover { background: var(--rojo-oscuro); transform: scale(1.04); }
+
+        /* ===== ESPECIALIDADES BANNER ===== */
+        .specials-banner {
+            background: linear-gradient(135deg, var(--rojo-oscuro) 0%, var(--rojo) 50%, #FF3300 100%);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .specials-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .specials-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+        }
+        .specials-text h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--blanco);
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        .specials-text h2 span { color: var(--amarillo); }
+        .specials-text p {
+            color: rgba(255,255,255,0.85);
+            margin-top: 10px;
+            font-size: 1rem;
+        }
+        .specials-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+        .btn-yellow {
+            background: var(--amarillo);
+            color: var(--negro);
+            font-size: 1rem;
+            font-weight: 800;
+            padding: 14px 28px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        .btn-yellow:hover { background: var(--amarillo-oscuro); transform: translateY(-2px); }
+
+        /* ===== NOSOTROS / FEATURES ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 36px 24px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            transition: 0.25s;
+        }
+        .feature-card:hover {
+            background: rgba(255,195,0,0.06);
+            border-color: rgba(255,195,0,0.2);
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--rojo-oscuro), var(--rojo));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 24px rgba(204,0,0,0.35);
+        }
+        .feature-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #888;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* ===== UBICACIÓN ===== */
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .map-wrap {
+            border-radius: 28px;
+            overflow: hidden;
+            border: 3px solid var(--amarillo);
+            box-shadow: 0 12px 40px rgba(255,195,0,0.15);
+        }
+        .map-wrap iframe {
+            width: 100%;
+            height: 380px;
+            display: block;
+            border: none;
+        }
+        .location-info { display: flex; flex-direction: column; gap: 20px; }
+        .loc-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 20px;
+            padding: 22px 24px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            transition: 0.2s;
+        }
+        .loc-card:hover { border-color: rgba(255,195,0,0.25); background: rgba(255,195,0,0.04); }
+        .loc-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: linear-gradient(135deg, var(--rojo-oscuro), var(--rojo));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+        }
+        .loc-card strong {
+            display: block;
+            color: var(--amarillo);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .loc-card p { color: #bbb; font-size: 0.88rem; line-height: 1.55; }
+        .loc-card a { color: #25D366; text-decoration: none; font-weight: 600; }
+        .loc-card a:hover { text-decoration: underline; }
+        .schedule-list { list-style: none; }
+        .schedule-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #bbb;
+            font-size: 0.85rem;
+        }
+        .schedule-list li:last-child { border-bottom: none; }
+        .schedule-list li span:last-child { color: #ccc; font-weight: 600; }
+        .schedule-list li.today { color: #4ade80; font-weight: 700; }
+        .schedule-list li.today span:last-child { color: #4ade80; }
+
+        /* ===== DOMICILIO CTA ===== */
+        .delivery-section {
+            background: linear-gradient(135deg, #111 40%, #1a0000 100%);
+            padding: 72px 0;
+            border-top: 2px solid var(--rojo);
+            border-bottom: 2px solid var(--rojo);
+        }
+        .delivery-inner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 48px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .delivery-text h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 14px;
+        }
+        .delivery-text h2 span { color: var(--amarillo); }
+        .delivery-text p { color: #aaa; font-size: 0.95rem; line-height: 1.6; max-width: 440px; }
+        .delivery-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .delivery-opt {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            padding: 18px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .delivery-opt:hover {
+            border-color: #25D366;
+            background: rgba(37,211,102,0.07);
+            transform: translateX(4px);
+        }
+        .delivery-opt i { font-size: 1.5rem; color: #25D366; }
+        .delivery-opt strong { color: white; display: block; font-size: 0.95rem; }
+        .delivery-opt span { color: #888; font-size: 0.8rem; }
+
+        /* ===== MODAL MENÚ ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--negro-suave);
+            border: 1px solid rgba(255,195,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 32px;
+            overflow: hidden;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, var(--rojo-oscuro), var(--rojo));
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-header h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-close {
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            opacity: 0.8;
+            transition: 0.15s;
+            background: none;
+            border: none;
+        }
+        .modal-close:hover { opacity: 1; transform: scale(1.2); }
+        .modal-body { overflow-y: auto; padding: 24px 28px; }
+        .modal-category {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--amarillo);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 22px 0 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,195,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            gap: 14px;
+        }
+        .modal-item:last-child { border-bottom: none; }
+        .modal-item-name { color: #e0e0e0; font-size: 0.88rem; font-weight: 500; }
+        .modal-item-desc { color: #777; font-size: 0.75rem; margin-top: 2px; }
+        .modal-item-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--rojo);
+            white-space: nowrap;
+        }
+        .modal-footer {
+            padding: 16px 28px 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #060606;
+            border-top: 3px solid var(--rojo);
+            padding: 48px 0 24px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-brand .logo-img { height: 52px; filter: brightness(0) invert(1); margin-bottom: 16px; }
+        .footer-brand p { color: #666; font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+        .footer-col h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--amarillo);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a, .footer-col ul li span {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-col ul li a:hover { color: #ccc; }
+        .footer-bottom {
+            border-top: 1px solid #1a1a1a;
+            padding-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        .footer-bottom p { color: #444; font-size: 0.78rem; }
+        .footer-bottom strong { color: var(--rojo); }
+        .footer-stripe {
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rojo), var(--amarillo), var(--rojo));
+            margin-top: 24px;
+            border-radius: 4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .hero h1 { font-size: 3rem; }
+            .hero-desc { margin: 0 auto 32px; }
+            .hero-cta { justify-content: center; }
+            .hero-chips { justify-content: center; }
+            .hero-tagline { font-size: 0.7rem; }
+            .hero-right { order: -1; }
+            .hero-logo { max-width: 260px; }
+            .location-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: 1 / -1; }
+        }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2.3rem; }
+            .hero-content { padding: 60px 20px 40px; }
+            .section-title { font-size: 2rem; }
+            .nav-link { display: none; }
+            .delivery-text h2 { font-size: 2rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .specials-text h2 { font-size: 1.9rem; }
+            .whatsapp-float { bottom: 20px; right: 20px; }
+            .whatsapp-btn { width: 52px; height: 52px; font-size: 1.4rem; }
+        }
+
+        button, a { font-family: inherit; }
+        a { text-decoration: none; }
+        button { background: none; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<!-- ===== WHATSAPP FLOTANTE ===== -->
+<div class="whatsapp-float">
+    <div class="whatsapp-bubble">🍗 ¡Pide tu domicilio o reserva aquí!</div>
+    <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK%20👋%20Quisiera%20hacer%20un%20pedido%20o%20reserva" 
+       class="whatsapp-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+    <div class="nav-bar">
+        <img class="logo-img" 
+             src="https://res.cloudinary.com/dcqnjn6fe/image/upload/v1776198948/b_Me_solo_el_nombre_si.jpeg_jprrxg.png" 
+             alt="MAXPOLLO JK" 
+             onerror="this.src='https://placehold.co/200x70/CC0000/FFFFFF?text=MAXPOLLO+JK'">
+        <div class="nav-right">
+            <a href="#menu" class="nav-link"><i class="fas fa-utensils"></i> Menú</a>
+            <a href="#nosotros" class="nav-link"><i class="fas fa-store"></i> Nosotros</a>
+            <a href="#ubicacion" class="nav-link"><i class="fas fa-map-marker-alt"></i> Ubicación</a>
+            <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK%20👋%20Quiero%20hacer%20un%20pedido" 
+               class="btn-nav-wa" target="_blank">
+                <i class="fab fa-whatsapp"></i> Pedir ahora
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-stripe"></div>
+    <div class="hero-content">
+        <div class="hero-left">
+            <div class="hero-tagline">
+                <i class="fas fa-fire"></i> 
+                El mejor asadero de Tibú
+            </div>
+            <h1>
+                Sabor que<br>
+                <span>enamora</span><br>
+                desde el primer bocado
+            </h1>
+            <p class="hero-desc">
+                Pollo asado, mollejas broster, alitas picantes y mucho más. 
+                Tradición, sazón y calidad en cada plato. 
+                Domicilios y reservas disponibles para ti.
+            </p>
+            <div class="hero-chips">
+                <div class="chip chip-open">
+                    <i class="fas fa-circle" style="font-size: 0.5rem;"></i> Abierto ahora
+                </div>
+                <div class="chip">
+                    <i class="far fa-clock"></i> Lun–Dom · 11am a 8pm
+                </div>
+                <div class="chip">
+                    <i class="fas fa-motorcycle"></i> Domicilios disponibles
+                </div>
+                <div class="chip">
+                    <i class="fas fa-map-marker-alt"></i> Tibú, Norte de Santander
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="btn-hero-main" id="openMenuBtn">
+                    <i class="fas fa-clipboard-list"></i> Ver menú completo
+                </button>
+                <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK%20👋%20Quiero%20hacer%20un%20pedido%20o%20reserva" 
+                   class="btn-hero-wa" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                </a>
+                <a href="#ubicacion" class="btn-hero-outline">
+                    <i class="fas fa-directions"></i> Cómo llegar
+                </a>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-logo-wrap">
+                <img class="hero-logo"
+                     src="https://res.cloudinary.com/dcqnjn6fe/image/upload/v1776198955/Photoroom-20260414_153343365_fzykci.png"
+                     alt="MAXPOLLO JK"
+                     onerror="this.src='https://placehold.co/340x280/330000/FFC300?text=🍗+MAXPOLLO+JK'">
+            </div>
+            <div class="hero-info-cards">
+                <div class="h-info-card">
+                    <i class="fas fa-fire-alt"></i>
+                    <strong>Asado fresco</strong>
+                    <span>Preparado al momento</span>
+                </div>
+                <div class="h-info-card">
+                    <i class="fas fa-motorcycle"></i>
+                    <strong>Domicilio</strong>
+                    <span>A tu puerta rápido</span>
+                </div>
+                <div class="h-info-card">
+                    <i class="fas fa-users"></i>
+                    <strong>Familiar</strong>
+                    <span>Para todos los gustos</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MENÚ ===== -->
+<section class="section" id="menu">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label"><i class="fas fa-drumstick-bite"></i> Nuestra carta</div>
+            <div class="section-title">Lo mejor de nuestro <span>menú</span></div>
+            <p class="section-desc">Platos preparados con amor, sazón única y los mejores ingredientes del Norte de Santander.</p>
+        </div>
+
+        <div class="menu-categories">
+            <button class="cat-btn active"><i class="fas fa-fire"></i> Destacados</button>
+            <button class="cat-btn"><i class="fas fa-drumstick-bite"></i> Asadero</button>
+            <button class="cat-btn"><i class="fas fa-pepper-hot"></i> Broster</button>
+            <button class="cat-btn"><i class="fas fa-leaf"></i> Acompañamientos</button>
+            <button class="cat-btn"><i class="fas fa-glass-cheers"></i> Bebidas</button>
+        </div>
+
+        <div class="menu-grid">
+
+            <!-- Card 1 -->
+            <div class="menu-card">
+                <span class="menu-card-badge">⭐ Estrella</span>
+                <div class="menu-card-img">🍗</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Mollejas A la Broster</div>
+                    <div class="menu-card-desc">Mollejas crujientes marinadas en especias secretas. Fritura perfecta, textura inigualable. ¡La favorita de Tibú!</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>18.900 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Mollejas%20A%20la%20Broster%20🍗%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="menu-card">
+                <span class="menu-card-badge">🌶️ Picante</span>
+                <div class="menu-card-img">🔥</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Alitas Picantes</div>
+                    <div class="menu-card-desc">6 jugosas alitas con salsa buffalo y toque de ají caribeño. Acompañadas de salsa ranch casera.</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>15.900 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Alitas%20Picantes%20🌶️%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="menu-card">
+                <span class="menu-card-badge">🏆 Popular</span>
+                <div class="menu-card-img">🍽️</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Pollo Asado Entero</div>
+                    <div class="menu-card-desc">Pollo entero asado a las brasas con marinado especial. Incluye papas fritas y ensalada fresca.</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>32.900 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Pollo%20Asado%20Entero%20🍽️%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="menu-card">
+                <div class="menu-card-img">🥩</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Costillas BBQ</div>
+                    <div class="menu-card-desc">Costillas ahumadas bañadas en salsa BBQ artesanal. Carne tierna que se desprende del hueso.</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>27.900 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Costillas%20BBQ%20🥩%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="menu-card">
+                <div class="menu-card-img">🍗</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Medio Pollo a la Brasa</div>
+                    <div class="menu-card-desc">Medio pollo asado a la brasa. Incluye arroz con vegetales y porción de papas.</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>19.900 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Medio%20Pollo%20a%20la%20Brasa%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="menu-card">
+                <div class="menu-card-img">🌽</div>
+                <div class="menu-card-body">
+                    <div class="menu-card-name">Chorizo Campesino</div>
+                    <div class="menu-card-desc">2 chorizos artesanales asados acompañados de arepa y ají casero. Sabor del campo colombiano.</div>
+                    <div class="menu-card-footer">
+                        <div class="menu-price"><sup>$</sup>12.500 <small style="font-size:0.6rem; color:#aaa;">COP</small></div>
+                        <a href="https://wa.me/573112223344?text=Hola!%20Quiero%20pedir%20Chorizo%20Campesino%20de%20MAXPOLLO%20JK" 
+                           class="btn-order" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CTA ver menú completo -->
+        <div style="text-align: center; margin-top: 44px;">
+            <button class="btn-hero-main" id="openMenuBtn2" style="margin: 0 auto; font-size: 0.95rem; padding: 13px 28px;">
+                <i class="fas fa-clipboard-list"></i> Ver carta completa con precios
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BANNER ESPECIAL ===== -->
+<div class="specials-banner">
+    <div class="specials-inner">
+        <div class="specials-text">
+            <h2>¿Antojo a domicilio<br>o <span>reserva de mesa</span>?</h2>
+            <p>Escríbenos por WhatsApp y te atendemos al instante. Pedidos disponibles dentro de Tibú.</p>
+        </div>
+        <div class="specials-cta">
+            <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quisiera%20hacer%20un%20pedido%20a%20domicilio%20🛵" 
+               class="btn-yellow" target="_blank">
+                <i class="fab fa-whatsapp"></i> Pedir domicilio ahora
+            </a>
+            <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quiero%20reservar%20una%20mesa%20🍽️" 
+               class="btn-hero-outline" target="_blank">
+                <i class="fas fa-calendar-check"></i> Reservar mesa
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ===== NOSOTROS / FEATURES ===== -->
+<section class="section section-alt" id="nosotros">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label"><i class="fas fa-store"></i> ¿Por qué elegirnos?</div>
+            <div class="section-title">El sabor de <span>MAXPOLLO JK</span></div>
+            <p class="section-desc">Somos el asadero de referencia en Tibú, Norte de Santander. Calidad, frescura y sazón auténtica.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-fire-alt"></i></div>
+                <h3>Asado al momento</h3>
+                <p>Cada pollo se prepara fresco al pedido. Nunca recalentado, siempre jugoso y en su punto.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+                <h3>Ingredientes frescos</h3>
+                <p>Seleccionamos los mejores insumos locales. Sabor natural, sin artificios, con la sazón de siempre.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-motorcycle"></i></div>
+                <h3>Domicilio rápido</h3>
+                <p>Llevamos tu pedido hasta la puerta de tu casa dentro de Tibú. Rápido, caliente y en perfectas condiciones.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
+                <h3>Ambiente familiar</h3>
+                <p>Espacio acogedor ideal para compartir en familia o con amigos. Atención cálida y personalizada.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DOMICILIO / RESERVAS ===== -->
+<section class="delivery-section">
+    <div class="container">
+        <div class="delivery-inner">
+            <div class="delivery-text">
+                <h2>Domicilios &<br><span>Reservas</span> fáciles</h2>
+                <p>Conéctate con nosotros por WhatsApp para hacer tu pedido a domicilio o reservar tu mesa. Atención rápida, sin complicaciones.</p>
+                <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 12px;">
+                    <div class="chip" style="background: rgba(37,211,102,0.1); border-color: rgba(37,211,102,0.2); color: #4ade80;">
+                        <i class="fas fa-clock"></i> Respuesta inmediata
+                    </div>
+                    <div class="chip" style="background: rgba(255,195,0,0.08); border-color: rgba(255,195,0,0.2); color: var(--amarillo);">
+                        <i class="fas fa-map-marker-alt"></i> Dentro de Tibú
+                    </div>
+                </div>
+            </div>
+            <div class="delivery-options">
+                <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quiero%20hacer%20un%20pedido%20a%20DOMICILIO%20🛵%0A%0AMi%20dirección%20es:%20" 
+                   class="delivery-opt" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>🛵 Pedir domicilio</strong>
+                        <span>Escríbenos y te enviamos tu pedido</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; font-size: 0.8rem; color: #444;"></i>
+                </a>
+                <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quiero%20RESERVAR%20una%20mesa%20🍽️%0A%0AFecha:%20%0ACantidad%20de%20personas:%20" 
+                   class="delivery-opt" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>🍽️ Reservar mesa</strong>
+                        <span>Asegura tu lugar para la ocasión especial</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; font-size: 0.8rem; color: #444;"></i>
+                </a>
+                <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quiero%20consultar%20el%20menú%20del%20día%20🍗" 
+                   class="delivery-opt" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <strong>📋 Menú del día</strong>
+                        <span>Consulta nuestras especiales diarias</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="margin-left: auto; font-size: 0.8rem; color: #444;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== UBICACIÓN ===== -->
+<section class="section section-alt" id="ubicacion">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-label"><i class="fas fa-map-marker-alt"></i> Encuéntranos</div>
+            <div class="section-title">Nuestra <span>ubicación</span></div>
+            <p class="section-desc">Estamos en el corazón de Tibú, Norte de Santander. ¡Fácil de llegar y de encontrar!</p>
+        </div>
+        <div class="location-grid">
+            <div class="map-wrap">
+                <!-- Mapa de Tibú, Norte de Santander - coordenadas reales del municipio -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31524.86741738!2d-72.74714!3d8.66066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5eb1406b7c5dcb%3A0x56a01fedc5d5e0d4!2sTib%C3%BA%2C%20Norte%20de%20Santander%2C%20Colombia!5e0!3m2!1ses!2sco!4v1713000000000!5m2!1ses!2sco" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Ubicación MAXPOLLO JK en Tibú">
+                </iframe>
+            </div>
+            <div class="location-info">
+                <div class="loc-card">
+                    <div class="loc-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <strong>Dirección</strong>
+                        <p>Tibú, Norte de Santander, Colombia<br>
+                        Zona urbana del municipio de Tibú<br>
+                        <small style="color: #666;">📌 Municipio del Catatumbo, Nororiente colombiano</small></p>
+                    </div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <strong>Horarios de atención</strong>
+                        <ul class="schedule-list">
+                            <li class="today"><span>Lunes – Viernes</span><span>11:00 am – 8:00 pm</span></li>
+                            <li class="today"><span>Sábado</span><span>11:00 am – 8:00 pm</span></li>
+                            <li class="today"><span>Domingo</span><span>11:00 am – 8:00 pm</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div>
+                        <strong>Contacto & Pedidos</strong>
+                        <p>
+                            <a href="https://wa.me/573112223344" target="_blank">
+                                <i class="fab fa-whatsapp"></i> +57 311 222 3344
+                            </a><br>
+                            <small style="color: #666;">Pedidos, reservas e información</small>
+                        </p>
+                    </div>
+                </div>
+                <div class="loc-card">
+                    <div class="loc-icon"><i class="fas fa-info-circle"></i></div>
+                    <div>
+                        <strong>Sobre Tibú</strong>
+                        <p>Tibú es la capital del Catatumbo, Norte de Santander. Municipio de tradición y sabor colombiano. MAXPOLLO JK es su asadero de referencia.</p>
+                    </div>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=MAXPOLLO+JK+Tibu+Norte+de+Santander+Colombia" 
+                   target="_blank"
+                   class="btn-yellow" style="justify-content: center; margin-top: 4px;">
+                    <i class="fas fa-directions"></i> Abrir en Google Maps
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MODAL MENÚ COMPLETO ===== -->
+<div class="modal-overlay" id="menuModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2><i class="fas fa-clipboard-list"></i> Carta MAXPOLLO JK</h2>
+            <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+
+            <div class="modal-category"><i class="fas fa-fire"></i> Destacados de la Casa</div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Mollejas A la Broster</div>
+                    <div class="modal-item-desc">Marinadas en especias secretas · Crujientes y jugosas</div>
+                </div>
+                <div class="modal-item-price">$18.900</div>
+            </div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Alitas Picantes (6 und)</div>
+                    <div class="modal-item-desc">Salsa buffalo + ají caribeño · Salsa ranch casera</div>
+                </div>
+                <div class="modal-item-price">$15.900</div>
+            </div>
+
+            <div class="modal-category"><i class="fas fa-drumstick-bite"></i> Asadero Especial</div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Pollo Asado Entero</div>
+                    <div class="modal-item-desc">+ Papas fritas + Ensalada fresca</div>
+                </div>
+                <div class="modal-item-price">$32.900</div>
+            </div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Medio Pollo a la Brasa</div>
+                    <div class="modal-item-desc">+ Arroz con vegetales + Porción de papas</div>
+                </div>
+                <div class="modal-item-price">$19.900</div>
+            </div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Costillas BBQ Ahumadas</div>
+                    <div class="modal-item-desc">Salsa BBQ artesanal · Carne que se desprende del hueso</div>
+                </div>
+                <div class="modal-item-price">$27.900</div>
+            </div>
+            <div class="modal-item">
+                <div>
+                    <div class="modal-item-name">Chorizo Campesino (2 und)</div>
+                    <div class="modal-item-desc">+ Arepa + Ají casero</div>
+                </div>
+                <div class="modal-item-price">$12.500</div>
+            </div>
+
+            <div class="modal-category"><i class="fas fa-leaf"></i> Acompañamientos</div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Papas a la Francesa</div></div>
+                <div class="modal-item-price">$7.900</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Yuca Frita con Suero</div></div>
+                <div class="modal-item-price">$8.900</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Maíz Asado</div></div>
+                <div class="modal-item-price">$5.900</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Ensalada Fresca</div></div>
+                <div class="modal-item-price">$6.500</div>
+            </div>
+
+            <div class="modal-category"><i class="fas fa-glass-cheers"></i> Bebidas</div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Jugo Natural (Maracuyá / Mango / Lulo)</div></div>
+                <div class="modal-item-price">$6.500</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Gaseosa Personal</div></div>
+                <div class="modal-item-price">$4.500</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Agua Mineral</div></div>
+                <div class="modal-item-price">$3.500</div>
+            </div>
+            <div class="modal-item">
+                <div><div class="modal-item-name">Cerveza Águila / Club Colombia</div></div>
+                <div class="modal-item-price">$7.000</div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <a href="https://wa.me/573112223344?text=Hola%20MAXPOLLO%20JK!%20Quiero%20hacer%20un%20pedido%20🍗%0A%0AMi%20pedido:%20" 
+               class="btn-hero-wa" target="_blank" style="flex: 1; justify-content: center;">
+                <i class="fab fa-whatsapp"></i> Hacer mi pedido por WhatsApp
+            </a>
+            <button class="btn-hero-outline" id="closeModal2" style="color: #888; border-color: #333;">
+                Cerrar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img class="logo-img" 
+                     src="https://res.cloudinary.com/dcqnjn6fe/image/upload/v1776198948/b_Me_solo_el_nombre_si.jpeg_jprrxg.png" 
+                     alt="MAXPOLLO JK"
+                     onerror="this.src='https://placehold.co/160x52/CC0000/FFFFFF?text=MAXPOLLO+JK'">
+                <p style="margin-top: 14px;">El asadero más querido de Tibú. Pollo asado, mollejas broster y alitas picantes con sabor auténtico. Atención de lunes a domingo.</p>
+                <a href="https://wa.me/573112223344" target="_blank" 
+                   style="display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; color: #25D366; font-size: 0.85rem; font-weight: 700; text-decoration: none;">
+                    <i class="fab fa-whatsapp" style="font-size: 1.1rem;"></i> +57 311 222 3344
+                </a>
+            </div>
+            <div class="footer-col">
+                <h4>Carta</h4>
+                <ul>
+                    <li><span><i class="fas fa-drumstick-bite"></i> Pollo Asado</span></li>
+                    <li><span><i class="fas fa-fire"></i> Mollejas Broster</span></li>
+                    <li><span><i class="fas fa-pepper-hot"></i> Alitas Picantes</span></li>
+                    <li><span><i class="fas fa-meat"></i> Costillas BBQ</span></li>
+                    <li><span><i class="fas fa-leaf"></i> Acompañamientos</span></li>
+                    <li><span><i class="fas fa-glass-cheers"></i> Bebidas</span></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Info</h4>
+                <ul>
+                    <li><span><i class="fas fa-map-marker-alt"></i> Tibú, Nte. de Santander</span></li>
+                    <li><span><i class="fas fa-clock"></i> Lun–Dom: 11am – 8pm</span></li>
+                    <li>
+                        <a href="https://wa.me/573112223344" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Pedidos por WhatsApp
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Tibu+Norte+de+Santander+Colombia" target="_blank">
+                            <i class="fas fa-directions"></i> Cómo llegar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/573112223344?text=Quiero%20reservar%20una%20mesa%20🍽️" target="_blank">
+                            <i class="fas fa-calendar-check"></i> Reservas
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 <strong>MAXPOLLO JK</strong> · Tibú, Norte de Santander · Todos los derechos reservados</p>
+            <p>Hecho con <span style="color: var(--rojo);">❤️</span> para el mejor sabor de Tibú</p>
+        </div>
+        <div class="footer-stripe"></div>
+    </div>
+</footer>
+
+<script>
+    // ===== MODAL MENÚ =====
+    const menuModal   = document.getElementById('menuModal');
+    const openBtn1    = document.getElementById('openMenuBtn');
+    const openBtn2    = document.getElementById('openMenuBtn2');
+    const closeBtn1   = document.getElementById('closeModal');
+    const closeBtn2   = document.getElementById('closeModal2');
+
+    const openModal  = () => { menuModal.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const closeModal = () => { menuModal.classList.remove('open'); document.body.style.overflow = ''; };
+
+    openBtn1.addEventListener('click', openModal);
+    openBtn2.addEventListener('click', openModal);
+    closeBtn1.addEventListener('click', closeModal);
+    closeBtn2.addEventListener('click', closeModal);
+    menuModal.addEventListener('click', e => { if (e.target === menuModal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ===== FILTRO CATEGORÍAS (visual) =====
+    const catBtns = document.querySelectorAll('.cat-btn');
+    catBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            catBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    // ===== NAVEGACIÓN SUAVE =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // ===== ANIMACIÓN DE ENTRADA (Intersection Observer) =====
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.menu-card, .feature-card, .loc-card, .delivery-opt').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+
+    // ===== ABRIR/CERRAR MODAL =====
+    // (Ya definido arriba, se deja limpio)
+
+    // ===== CONSOLE =====
+    console.log('%c🍗 MAXPOLLO JK - Tibú', 'color: #CC0000; font-size: 18px; font-weight: bold;');
+    console.log('%cEl mejor asadero de Norte de Santander', 'color: #FFC300; font-size: 12px;');
+</script>
+</body>
+</html>
